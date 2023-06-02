@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
-	internal_errors "github.com/manuelcunga/Pulse-Mailer/api/rest/errors"
+	erro "github.com/manuelcunga/Pulse-Mailer/api/rest/errors"
 	"github.com/manuelcunga/Pulse-Mailer/domain/repository/mocks"
 	campaign_usecase "github.com/manuelcunga/Pulse-Mailer/usecases/campaign"
 	"github.com/manuelcunga/Pulse-Mailer/usecases/campaign/dtos"
@@ -64,7 +64,7 @@ func TestCreateCampaign_RepositoryError(t *testing.T) {
 		Contacts: []string{"manuel@gmail.com", "android2@gmail.com"},
 	}
 
-	expectedError := internal_errors.ErrInternal
+	expectedError := erro.ErrorResponse{Message: "Internal Sever Error"}
 	mockCampaignRepo.EXPECT().Create(gomock.Any()).Return(expectedError)
 
 	campaignID, err := campaignUseCase.Create(input)
